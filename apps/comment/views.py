@@ -34,3 +34,8 @@ class CommentAPI(APIView):
         data = json.loads(request.body.decode('utf-8'))
         Comment.objects.filter(pk=data['comment_id']).update(comment=data['comment'])
         return HttpResponse("Comment Updated successfully!")
+
+    def delete(self, request):
+        data = json.loads(request.body.decode('utf-8'))
+        Comment.objects.get(pk=data['comment_id']).delete()
+        return HttpResponse("Comment Deleted successfully!")

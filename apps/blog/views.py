@@ -33,6 +33,11 @@ class PostAPI(APIView):
         Post.objects.filter(pk=data['post_id']).update(body=data['body'], title=data['title'])
         return HttpResponse("Post Updated successfully!")
 
+    def delete(self, request):
+        data = json.loads(request.body.decode('utf-8'))
+        Post.objects.get(pk=data['post_id']).delete()
+        return HttpResponse("Post Deleted successfully!")
+
     @api_view(['POST'])
     def registration(request):
         # print(request.body)
